@@ -1,0 +1,23 @@
+
+node{
+
+    def mvnHome
+    stage('Checkout') {
+          // Get some code from a GitHub repository
+          git 'https://github.com/zivkashtan/course.git';
+          // set the Maven tool.
+          mvnHome = tool 'M3'
+       }
+
+     stage('Package') {
+          // Run the maven package
+          echo sh (returnStdout: true, script: "'${mvnHome}/bin/mvn' package")
+       }
+
+      stage('Creating Dockerfile') {
+           //Create the Dockerfile in the workdir
+           echo sh (returnStdout: true, script: "echo 'FROM tomcat:8.0.20-jre8' > Dockerfile")
+           echo sh (returnStdout: true, script: "echo 'COPY ./web/target/time-tracker-web-0.3.1.war /usr/local/tomcat/webapps/' >> Dockerfile")
+       }
+}
+
