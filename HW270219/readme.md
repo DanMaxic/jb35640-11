@@ -1,5 +1,6 @@
 #JB36540-11 HW: 270219
-
+### TAGS:
+\#jenkins \#jenkinspipeline
 # Tasks:
 given following jenkins file definition, you need to perform the following tasks:
 * Merge following stages of our Jenkins pipeline: 
@@ -8,6 +9,11 @@ given following jenkins file definition, you need to perform the following tasks
 * Create following stages:
   1. Create K8s depoyment (yaml with external service)
   3. "Ansible deployment"
+* **a bonus**:
+  1. under "Jenkins pipelines" directory, you will find some files starting with "Jenkinsfile*":
+      1. what they does? describe in psudu code (may in hebrew)
+      2. what the diffrences between the syntax?
+      
   
 **Important notes:** 
 * Please use comments explaining your choice, comments are made with '//' chars on the beginning of the line.
@@ -15,8 +21,8 @@ given following jenkins file definition, you need to perform the following tasks
 
 **resources to use:**
 1. [Jenkins pipeline book link](https://jenkins.io/doc/book/pipeline/)
-1. [Jenkins pipeline syntax](https://jenkins.io/doc/book/pipeline/syntax/)
-
+2. [Jenkins pipeline syntax](https://jenkins.io/doc/book/pipeline/syntax/)
+3. [jenkins declerative workflow syntax link](https://jenkins.io/doc/pipeline/steps/workflow-basic-steps)
 
 
 ```

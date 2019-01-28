@@ -1,0 +1,44 @@
+#!/usr/bin/env groovy
+// guess what type i am, and what i'm doing...
+pipeline {
+    agent any
+    environment {
+
+        DOCKER_HUB_USERNAME = "BAR"
+        DOCKER_HUB_PASSWORD = ""
+        DOCKERHUB_REPO_NAME = ""
+
+    }
+    stages {
+        stage('build final artifact') {
+            git url: 'https://github.com/zivkashtan/course.git'
+            sh 'mvn package'
+
+            writeFile file: "Dockerfile", text: """
+                FROM tomcat:8.0.20-jre8
+                COPY ./web/target/*.war /usr/local/tomcat/webapps/
+            """
+            sh "docker build -t snscaimito/ledger-service:${env.BUILD_ID} ."
+
+            sh """
+              docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
+              docker tag ${DOCKERHUB_REPO_NAME}:latest
+              docker push ${DOCKERHUB_REPO_NAME}:latest
+            """
+            sh "docker push ${DOCKERHUB_REPO_NAME}:latest"
+        }
+    }
+    post {
+        success {
+            mail to: 'team@example.com',
+                    subject: "passed Pipeline: ${currentBuild.fullDisplayName}",
+                    body: "Something is OK with ${env.BUILD_URL}"
+        }
+        failure {
+            // notify users when the Pipeline fails
+            mail to: 'team@example.com',
+                    subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                    body: "Something is wrong with ${env.BUILD_URL}"
+        }
+    }
+}
