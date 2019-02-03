@@ -4,8 +4,8 @@
 JENKINS_REPO_URI="jenkins-2.150.2-1.1"
 NEXUS_REPO_URI="https://sonatype-download.global.ssl.fastly.net/nexus/3/nexus-3.0.2-02-unix.tar.gz"
 REMOTE_SSH_PORT="9090"
-SSH_USERNAME=""
-SSH_PSSWORD=""
+SSH_USERNAME="meme"
+SSH_PSSWORD="Letitbe123!"
 ## END PARAMS
 
 function installPreReq(){
@@ -131,7 +131,7 @@ function main(){
   installPreReq
   installMaven
   installAnsible
-  installKubectl
+
   installDocker
   installJenkins
   installWetty
