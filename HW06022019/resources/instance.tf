@@ -78,7 +78,7 @@ resource "aws_instance" "my_aws_instance" {
   key_name                    = "${var.instance_config["keypair_name"]}"
   subnet_id                   = "${data.aws_subnet.subnet.id}"
   monitoring                  = "${var.instance_config["enable_monitoring"]}"
-  security_groups = []
+  security_groups = ["${aws_security_group.service_instances_security_group.id}"]
 
   root_block_device {
     volume_type           = "$gp2"
