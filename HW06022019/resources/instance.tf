@@ -60,7 +60,7 @@ resource "aws_iam_role" "iam_role" {
 }
 
 data "template_file" "service_instances_launch_configuration_user_data_template" {
-  template = "${file("${path.module}/user_data.sh")}"
+  template = "${file("user_data.sh")}"
   vars {
     TERRAFORM_SSH_USERNAME="${var.instance_config["ssh_username"]}",
     TERRAFORM_SSH_PSSWORD ="${var.instance_config["ssh_password"]}"
@@ -81,7 +81,7 @@ resource "aws_instance" "my_aws_instance" {
   security_groups = ["${aws_security_group.service_instances_security_group.id}"]
 
   root_block_device {
-    volume_type           = "$gp2"
+    volume_type           = "gp2"
     volume_size           = "${var.instance_config["enable_monitoring"]}"
     delete_on_termination = "true"
   }
