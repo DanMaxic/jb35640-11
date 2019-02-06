@@ -82,7 +82,7 @@ resource "aws_instance" "my_aws_instance" {
 
   root_block_device {
     volume_type           = "gp2"
-    volume_size           = "${var.instance_config["enable_monitoring"]}"
+    volume_size           = "${var.instance_config["root_volume_size"]}"
     delete_on_termination = "true"
   }
 
