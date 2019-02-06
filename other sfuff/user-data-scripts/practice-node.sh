@@ -115,6 +115,7 @@ Group=wetty_users
 WantedBy=multi-user.target
 EOF
   sed -i "s/.*PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+  systemctl restart sshd
   systemctl enable wetty.service
   systemctl start wetty.service
 }
