@@ -5,7 +5,7 @@ variable "instance_config" {
     source_image_name="amazon/amzn2-ami-hvm-2.0.20190115-x86_64-gp2"
     instance_type="t2.micro",
     associate_public_ip_address ="true",
-    
+    keypair_name="ubuntu",
     enable_monitoring="true",
     disable_api_termination ="false"
     root_volume_size="30"
