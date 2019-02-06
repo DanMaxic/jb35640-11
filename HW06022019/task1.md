@@ -12,7 +12,7 @@
 ```jshelllanguage
 terraform init
 terraform plan -var-file='terraform.tfvars' 
-terraform plan -var-file='terraform.tfvars' 
+terraform apply -var-file='terraform.tfvars' 
 ```
 
 
@@ -25,7 +25,7 @@ private_key_path = "<path to private key>"
 
 
 
-terraform file:
+terraform file: main.tf
 ```terraform
 
 variable "aws_access_key" {} 
