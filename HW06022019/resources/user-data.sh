@@ -4,8 +4,8 @@
 JENKINS_REPO_URI="jenkins-2.150.2-1.1"
 NEXUS_REPO_URI="https://sonatype-download.global.ssl.fastly.net/nexus/3/nexus-3.0.2-02-unix.tar.gz"
 REMOTE_SSH_PORT="9090"
-SSH_USERNAME="meme"
-SSH_PSSWORD="Letitbe123!"
+SSH_USERNAME="${TERRAFORM_SSH_USERNAME}"
+SSH_PSSWORD="${TERRAFORM_SSH_PSSWORD}"
 ## END PARAMS
 
 function installPreReq(){
@@ -40,7 +40,7 @@ function installDocker(){
 
 function installJenkins(){
   echo "±±±±±±±±±±±±±>install jenkins"
-  yum install -y https://prodjenkinsreleases.blob.core.windows.net/redhat-stable/${JENKINS_REPO_URI}.noarch.rpm java
+  yum install -y https://prodjenkinsreleases.blob.core.windows.net/redhat-stable/$${JENKINS_REPO_URI}.noarch.rpm java
   systemctl enable jenkins
   systemctl start jenkins
 
@@ -66,20 +66,7 @@ function installNexusArtifactory(){
   adduser nexus
   chown -R nexus:nexus /app/nexus
   echo "run_as_user=\"nexus\"" >> /app/nexus/bin/nexus.rc
-  cat << EOF > /etc/ecs/ecs.config
--Xms1200M
--Xmx1200M
--XX:+UnlockDiagnosticVMOptions
--XX:+UnsyncloadClass
--Djava.net.preferIPv4Stack=truer
--Dkaraf.home=.
--Dkaraf.base=.
--Dkaraf.etc=etc
--Djava.util.logging.config.file=etc/java.util.logging.properties
--Dkaraf.data=/nexus/nexus-data
--Djava.io.tmpdir=data/tmp
--Dkaraf.startLocalConsole=false
-EOF
+
   sudo ln -s /app/nexus/bin/nexus /etc/init.d/nexus
   chkconfig --add nexus
   chkconfig --levels 345 nexus on
@@ -100,7 +87,7 @@ Description=wetty remote ssh web
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/node /usr/lib/node_modules/wetty/bin/wetty.js -p ${REMOTE_SSH_PORT}
+ExecStart=/usr/bin/node /usr/lib/node_modules/wetty/bin/wetty.js -p $${REMOTE_SSH_PORT}
 #WorkingDirectory=/opt/nodeserver
 Restart=always
  RestartSec=10
@@ -115,6 +102,8 @@ Group=wetty_users
 WantedBy=multi-user.target
 EOF
   sed -i "s/.*PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+  service sshd restart
+  echo "wetty    ALL=(ALL)    NOPASSWD:ALL" >> /etc/sudoers
   systemctl enable wetty.service
   systemctl start wetty.service
 }
@@ -123,9 +112,9 @@ function configureLogins(){
 
     groupadd remote_users
     echo "remote_users    ALL=(ALL)    NOPASSWD:ALL" >> /etc/sudoers
-    echo "${SSH_USERNAME}    ALL=(ALL)    NOPASSWD:ALL" >> /etc/sudoers
+    echo "$${SSH_USERNAME}    ALL=(ALL)    NOPASSWD:ALL" >> /etc/sudoers
     useradd ${SSH_USERNAME} -G remote_users
-    echo "${SSH_PSSWORD}" | sudo passwd ${SSH_USERNAME} --stdin
+    echo "$${SSH_PSSWORD}" | sudo passwd ${SSH_USERNAME} --stdin
 
 }
 
