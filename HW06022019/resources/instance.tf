@@ -1,7 +1,7 @@
 
 variable "instance_config" {
   type = "map"
-  defualt ={
+  default ={
     source_image_name="amazon/amzn2-ami-hvm-2.0.20190115-x86_64-gp2"
     instance_type="t2.micro",
     associate_public_ip_address ="true",
