@@ -56,7 +56,7 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 resource "aws_instance" "nginx" { 
-  ami = "ami-c58c1dd3"
+  ami = "${aws_ami.ubuntu.id}"
   instance_type = "t2.micro"
   key_name = "${var.key_name}" 
   connection { 
