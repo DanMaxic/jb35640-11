@@ -1,7 +1,12 @@
-#JB36540-11 HW: 06 Feb 2019
+# task1
+
+## JB36540-11 HW: 06 Feb 2019
+
 ### TAGS:
-\#terraform 
-# Lesson task 1: basics
+
+\#terraform
+
+## Lesson task 1: basics
 
 * create the files described below
 * please note, you will need the private key to access it. 
@@ -9,25 +14,24 @@
   1. shat changes to the code you needed to perform?
   2. how built the state file? 
   3. run terraform graph, observe it, how it built? why?
-```jshelllanguage
-terraform init
-terraform plan -var-file='terraform.tfvars' 
-terraform apply -var-file='terraform.tfvars' 
-```
 
+     ```text
+     terraform init
+     terraform plan -var-file='terraform.tfvars' 
+     terraform apply -var-file='terraform.tfvars'
+     ```
 
 terraform.tfvars
-```jshelllanguage
+
+```text
 aws_access_key = "<insert access key here>"
 aws_secret_key = "<insert secret key here>"
 private_key_path = "<path to private key>"
 ```
 
-
-
 terraform file: main.tf
-```terraform
 
+```text
 variable "aws_access_key" {} 
 variable "aws_secret_key" {} 
 variable "private_key_path" {} 
@@ -68,7 +72,6 @@ resource "aws_instance" "nginx" {
 }  
 output "aws_instance_public_dns" { 
   value = "${aws_instance.nginx.public_dns}"
-} 
-
-
+}
 ```
+
