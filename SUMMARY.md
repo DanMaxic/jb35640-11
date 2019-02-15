@@ -1,8 +1,8 @@
 # Table of contents
 
 * [jb35640-11](README.md)
-* [HW13022019](hw13022019/README.md)
-  * [readme](hw13022019/hw13022019.md)
+* [HW13022019](HW13022019/README.md)
+  * [readme](HW13022019/hw13022019.md)
 * [HW03022019](hw030219/README.md)
   * [readme](hw030219/hw030219.md)
 * [HW06022019](hw06022019/README.md)
