@@ -65,7 +65,7 @@ function installNexusArtifactory(){
   mv nexus-* nexus
   adduser nexus
   chown -R nexus:nexus /app/nexus
-  echo "run_as_user=\"nexus\"" >> /app/nexus/bin/nexus.rc
+  echo -e "\nrun_as_user=\"nexus\"" >> /app/nexus/bin/nexus.rc
   cat << EOF > /etc/ecs/ecs.config
 -Xms1200M
 -Xmx1200M
