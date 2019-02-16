@@ -40,7 +40,6 @@ scrape_configs:
     static_configs:
     - targets: ['localhost:9090']
 EOF
-
 ```
 
 **ubuntu installation**

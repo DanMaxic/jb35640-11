@@ -19,7 +19,6 @@ chkconfig --add kibana
 systemctl daemon-reload
 systemctl enable kibana.service
 sudo service kibana start
-
 ```
 
 **ubuntu installation**
