@@ -40,3 +40,9 @@ description: מבוא לתרגילים המסכמים
 | 10% | ביצוע ניתוח נכון של דרישות התרגיל |
 | 40% | עמידה בסעיפים \(קוד + טכנולוגיות\) |
 
+
+```sequence simple(default theme)
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```
