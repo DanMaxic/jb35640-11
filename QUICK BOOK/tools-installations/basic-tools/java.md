@@ -16,7 +16,6 @@ wget -O ~/jdk${JDK_VER}.rpm --no-cookies --no-check-certificate --header "Cookie
  https://download.oracle.com/otn-pub/java/jdk/${JDK_VER}+9/f51449fcd52f4d52b93a989c5c56ed3c/jdk-${JDK_VER}_linux-x64_bin.rpm
 yum -y localinstall ~/jdk${JDK_VER}.rpm
 rm -f ~/jdk${JDK_VER}.rpm
-
 ```
 
 **ubuntu installation**
