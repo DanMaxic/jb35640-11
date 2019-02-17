@@ -1,4 +1,4 @@
-# Jenkins
+# KIBANA
 
 ## Tool prerequisites
 

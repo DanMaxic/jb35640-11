@@ -1,4 +1,4 @@
-# Jenkins
+# ELASTIC
 
 ## Tool prerequisites
 
