@@ -1,0 +1,19 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: time-tracker
+spec:
+  selector:
+    matchLabels:
+      app: tt
+  replicas: 2 
+  template:
+    metadata:
+      labels:
+        app: tt
+    spec:
+      containers:
+      - name: tt
+        image: myTimeTrackerRepo:prod
+        ports:
+        - containerPort: 80
