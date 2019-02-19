@@ -1,4 +1,4 @@
-# Jenkins
+# MAVEN
 
 ## Tool prerequisites
 

@@ -10,16 +10,13 @@
 
 * create the files described below
 * please note, you will need the private key to access it. 
-* run terraform, and answer the following questions:
-  1. shat changes to the code you needed to perform?
-  2. how built the state file? 
-  3. run terraform graph, observe it, how it built? why?
+* run terraform, and answer the following questions: 1. shat changes to the code you needed to perform? 2. how built the state file? 3. run terraform graph, observe it, how it built? why?
 
-     ```text
+  ```text
      terraform init
      terraform plan -var-file='terraform.tfvars' 
      terraform apply -var-file='terraform.tfvars'
-     ```
+  ```
 
 terraform.tfvars
 
