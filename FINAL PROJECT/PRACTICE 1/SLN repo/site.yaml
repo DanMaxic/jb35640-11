@@ -1,0 +1,25 @@
+---  
+
+- hosts: "{{ variable_host | default('127.0.0.1') }}"
+  connection: "{{ connectiontype | default('local') }}"
+  gather_facts: no
+  vars:
+    appname: "{{ app }}"
+  tasks:
+    - name: Make sure docker installed 
+      apt:
+        name: docker
+        state: present
+    - name: Make sure docker running
+      service:
+        name: docker
+        state: started
+    - name: Create a data container
+      docker_container:
+        name: time-tracker
+        image: "{{ appname }}" 
+        state: started
+        ports:
+          "80:8080"
+
+

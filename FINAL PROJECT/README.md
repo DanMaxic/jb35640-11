@@ -1,8 +1,9 @@
+# מבוא: תרגילים מסכמים
 ---
 description: מבוא לתרגילים המסכמים
 ---
 
-# מבוא: תרגילים מסכמים
+
 
 
 
@@ -41,8 +42,12 @@ description: מבוא לתרגילים המסכמים
 | 40% | עמידה בסעיפים \(קוד + טכנולוגיות\) |
 
 
-```sequence simple(default theme)
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
+```gnuplot {cmd=true output="html"}
+set terminal svg
+set title "Simple Plots" font ",20"
+set key left box
+set samples 50
+set style data points
+
+plot [-10:10] sin(x),atan(x),cos(atan(x))
 ```
