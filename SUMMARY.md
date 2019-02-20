@@ -36,5 +36,5 @@
   * [readme](quick-book/book.md)
 * [מבוא: תרגילים מסכמים](final-project/README.md)
   * [תרגיל 1 \(כיתה\)](final-project/practice-1.md)
-  * [דדכג](final-project/practice-2.md)
+  * [תרגיל 2](final-project/practice-2.md)
 

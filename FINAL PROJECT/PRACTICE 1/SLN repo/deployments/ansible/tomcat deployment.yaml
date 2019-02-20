@@ -1,0 +1,24 @@
+---
+- hosts: tomcatServer
+  vars:
+  - warName: varvar.war
+  - warRemotePath: /path/to/put/war
+
+  tasks:
+  - name: Download WAR to server
+    synchronize: src={{ warLocalPath }}/{{ warName }} dest={{ warRemotePath }}/{{ warName }}
+
+  - name: Unzip WAR file
+    unarchive: src={{ warRemotePath }}/{{ warName }} dest=/var/lib/tomcat/webapps/ROOT/ copy=no mode=0755 owner=tomcat group=tomcat
+    notify:
+        - Restart tomcat
+
+  - name: Delete remote war file
+    file: path={{ warRemotePath }}/{{ warName }} state=absent
+
+  handlers:
+    - name: Restart tomcat
+      service: name=tomcat state=restarted
+
+	  
+	  
