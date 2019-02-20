@@ -20,16 +20,19 @@ node {
     app = docker.build(DOCKERHUB_REPO_NAME)
   }
 
+
   stage('Push image') {
-    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '<CREDENTIAL_ID>',
+
+    docker.withRegistry('','dockerhubcred')
+
+
+
+
+    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'tempcred',
                      usernameVariable: DOCKER_HUB_USERNAME, passwordVariable: DOCKER_HUB_PASSWORD]]) {
       docker.withRegistry('https://registry.hub.docker.com', 'tempcred') {
         app.push("${env.BUILD_NUMBER}")
-        if (env.BRANCH_NAME == 'master') {
-          app.push("stable")
-        } else {
-          app.push("latest")
-        }
+
       }
     }
   }
