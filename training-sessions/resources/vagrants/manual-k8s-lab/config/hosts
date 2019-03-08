@@ -1,0 +1,3 @@
+172.16.2.101 master.k8slab
+172.16.2.102 slave1.k8slab
+172.16.2.103 slave2.k8slab
