@@ -91,7 +91,7 @@ sudo kubeadm join $controller_private_ip:6443 --token $token --discovery-token-c
  It should look something like this:
  
 ```bash
- NAME            STATUS   ROLES    AGE     VERSION
+ NAME                      STATUS   ROLES    AGE     VERSION
  master.k8slab   Ready    master   3m36s   v1.12.2
  slave1.k8slab   Ready    <none>   23s     v1.12.2
  slave2.k8slab   Ready    <none>   23s     v1.12.2

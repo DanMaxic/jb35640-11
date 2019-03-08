@@ -1,0 +1,21 @@
+[all]
+ans1.anslab ansible_host=172.16.3.101
+ans2.anslab ansible_host=172.16.3.102
+ans3.anslab ansible_host=172.16.3.103
+
+[all:vars]
+ansible_connection=ssh
+ansible_user=vagrant
+ansible_pass=vagrant
+ansible_ssh_user=vagrant
+ansible_ssh_pass=vagrant
+ansible_become=true
+
+[nginx]
+ans1.anslab
+
+[tomcat]
+ans1.anslab
+
+[DB]
+ans1.anslab

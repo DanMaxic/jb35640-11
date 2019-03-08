@@ -1,0 +1,35 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# default constants
+TIME = Time.now.strftime('%Y%m%d%H%M%S')
+CONFIGFILE_HOSTS = './config/hosts'
+VAGRANT_BOX = "centos/7"
+
+# build hosts hash
+hosts = {}
+File.readlines(CONFIGFILE_HOSTS).map(&:chomp).each do |line|
+  ipaddr, hostname = line.split(/\s+/)
+  hosts[hostname] = ipaddr
+end
+
+Vagrant.configure('2') do |config|
+
+  config.vm.box = "centos/7"
+  config.vm.provider 'virtualbox' do |vb|
+    vb.linked_clone = true
+    vb.memory =  4096
+    vb.cpus = 2
+  end
+
+  hosts.each do |hostname, ipaddr|
+    config.vm.define hostname do |node|
+      node.vm.hostname = hostname
+      node.vm.network 'private_network', ip: ipaddr
+      node.vm.provider('virtualbox') { |vbox| vbox.name = "#{hostname}" }
+      node.vm.provision "shell", path: "machines-user-data/common.sh"
+      node.vm.post_up_message = "SERVER: #{hostname} IS UP, IP ADDRESS IS: #{ipaddr}"
+    end
+  end
+
+end
