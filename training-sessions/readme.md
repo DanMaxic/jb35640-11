@@ -16,7 +16,7 @@
 ## meetings links
 
 | Meeting date  | Place           |  Hangouts Meeting    |
-| ------------- |:---------------:|: -------------------:|
+| ------------- |---------------|: -------------------:|
 | 08/03/2019      | room 401 | https://meet.google.com/ono-ibiz-cav |
 | 15/03/2019      | room 401 | https://meet.google.com/cvu-fags-vom  |
 | 08/03/2019      | room 401 | https://meet.google.com/xyj-nsba-iqg |
