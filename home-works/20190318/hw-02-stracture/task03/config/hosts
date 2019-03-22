@@ -1,0 +1,4 @@
+172.16.1.101 artifactory.cilab
+172.16.1.102 gitserver.cilab
+172.16.1.103 buildserver.cilab
+172.16.1.104 buildnode.cilab

@@ -30,11 +30,21 @@ Vagrant.configure('2') do |config|
       node.vm.provision "shell", path: "machines-user-data/common.sh"
       node.vm.provision "shell", path: "machines-user-data/#{hostname.split(/\./)[0]}.sh"
       node.vm.post_up_message = "SERVER: #{hostname} IS UP, IP ADDRESS IS: #{ipaddr}"
-      config.vm.network "forwarded_port", guest: 8080, host: 8080, protocol: "tcp", auto_correct: true
-
     end
   end
 
-
+  #172.16.0.53 kube.cilab
+  config.vm.define :kube_server do |node|
+    node.vm.hostname="kube.cilab"
+    node.vm.provider :virtualbox do| vb |
+      vb.name= "#{node.vm.hostname}"
+      vb.linked_clone = true
+      vb.memory =  4096
+      vb.cpus = 2
+    end
+    node.vm.network 'private_network', ip: "172.16.1.104"
+    node.vm.provision "shell", path: "machines-user-data/common.sh"
+    node.vm.provision "shell", path: "machines-user-data/#{node.vm.hostname.split(/\./)[0]}.sh"
+  end
 
 end

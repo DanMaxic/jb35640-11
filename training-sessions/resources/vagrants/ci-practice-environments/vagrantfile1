@@ -1,0 +1,54 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+#
+#
+#
+CONFIGFILE_HOSTS = './config/hosts'
+hosts = {}
+File.readlines(CONFIGFILE_HOSTS).map(&:chomp).each do |line|
+  ipaddr, hostname = line.split(/\s+/)             # only grab first two columns
+  hosts[hostname] = ipaddr                         # store in hash
+end
+
+
+
+Vagrant.configure("2") do |config|
+
+  # config.vm.synced_folder ".", "/vagrant", type: "nfs", nfs_udp: false
+  config.vm.box = "centos/7"
+  config.vm.provider 'virtualbox' do |vb|
+    vb.linked_clone = true
+    vb.memory =  1024
+    vb.cpus = 1
+    # vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    # vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+  end
+
+
+  config.vm.define :ci_server do |server|
+    server.vm.hostname="ci-server"
+    server.vm.provider ('virtualbox') { | vb |  vb.name= "#{server.vm.hostname}" }
+    server.vm.provision "shell", path: "machines-user-data/#{server.vm.hostname}.sh"
+  end
+
+  config.vm.define :mon_server do |server|
+    server.vm.hostname="mon-server"
+    server.vm.provider ('virtualbox') { | vb |  vb.name= "#{server.vm.hostname}" }
+    server.vm.provision "shell", path: "machines-user-data/#{server.vm.hostname}.sh"
+  end
+
+  config.vm.define :web_server do |server|
+    server.vm.hostname="web-server"
+    server.vm.provider ('virtualbox') { | vb |  vb.name= "#{server.vm.hostname}" }
+    server.vm.provision "shell", path: "machines-user-data/#{server.vm.hostname}.sh"
+  end
+
+  config.vm.define :kube_server do |server|
+    server.vm.hostname="kube-server"
+    server.vm.provider ('virtualbox') { | vb |  vb.name= "#{server.vm.hostname}" }
+    server.vm.provision "shell", path: "machines-user-data/#{server.vm.hostname}.sh"
+  end
+  # global provisioners area
+  config.vm.provision "shell", inline: "echo Hello"
+
+end
